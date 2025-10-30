@@ -1,0 +1,17 @@
+# 环境变量管理
+python-dotenv==1.0.0
+
+# 火山引擎SDK
+volcengine-python-sdk[ark]
+
+# HTTP请求
+requests
+
+# 图像处理
+Pillow
+
+# Excel处理
+openpyxl
+
+# 其他依赖
+

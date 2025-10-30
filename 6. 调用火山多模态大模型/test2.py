@@ -1,11 +1,21 @@
 import requests
 import json
+import os
+from dotenv import load_dotenv
 
-url = "https://ark.cn-beijing.volces.com/api/v3/chat/completions"
+# 加载环境变量
+load_dotenv('config.env')
+
+# 从环境变量读取配置
+API_KEY = os.getenv('ARK_API_KEY_BACKUP')
+BASE_URL = os.getenv('ARK_BASE_URL', 'https://ark.cn-beijing.volces.com/api/v3')
+MODEL_NAME = os.getenv('MODEL_NAME_VISION_PRO', 'doubao-1.5-vision-pro-250328')
+
+url = f"{BASE_URL}/chat/completions"
 
 payload = json.dumps({
    "stream": False,
-   "model": "doubao-1.5-vision-pro-250328",
+   "model": MODEL_NAME,
    "messages": [
       {
          "role": "system",
@@ -29,7 +39,7 @@ payload = json.dumps({
    ]
 })
 headers = {
-   'Authorization': 'Bearer 3fbc40fc-551c-4e91-b9a5-a74efc60eb6a',
+   'Authorization': f'Bearer {API_KEY}',
    'Content-Type': 'application/json'
 }
 

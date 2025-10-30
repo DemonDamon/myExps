@@ -9,6 +9,10 @@ from PIL import Image
 from volcenginesdkarkruntime import Ark
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
+from dotenv import load_dotenv
+
+# 加载环境变量
+load_dotenv('config.env')
 
 # 修改后的提示词
 prompt = """
@@ -33,12 +37,12 @@ def encode_image(img, max_size=2000):
     img.save(byte_stream, **save_params)
     return base64.b64encode(byte_stream.getvalue()).decode('utf-8'), img_format.lower()
 
-# 配置参数
-CONCURRENT_NUM = 10  # 并发数，可以修改这个值
-STREAM_TIMEOUT = 300  # 流式输出超时时间（秒），5分钟
-API_KEY = '8a44058e-5674-4923-80c9-4373532dcc68'
-BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
-MODEL_NAME = "doubao-seed-1-6-vision-250815"
+# 从环境变量读取配置参数
+CONCURRENT_NUM = int(os.getenv('CONCURRENT_NUM', '10'))  # 并发数
+STREAM_TIMEOUT = int(os.getenv('STREAM_TIMEOUT', '300'))  # 流式输出超时时间（秒）
+API_KEY = os.getenv('ARK_API_KEY')  # 从环境变量读取
+BASE_URL = os.getenv('ARK_BASE_URL', 'https://ark.cn-beijing.volces.com/api/v3')
+MODEL_NAME = os.getenv('MODEL_NAME', 'doubao-seed-1-6-vision-250815')
 
 # 目标图片
 TARGET_IMAGE = '/Users/damon/myWork/myExps/6. 调用火山多模态大模型/typical/1.jpg'

@@ -1,0 +1,27 @@
+# 环境变量文件 - 包含敏感信息
+config.env
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 测试结果
+*.xlsx
+并发测试结果.xlsx
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+

@@ -1,17 +1,26 @@
 import os
+from dotenv import load_dotenv
 # Install SDK:  pip install 'volcengine-python-sdk[ark]' .
 from volcenginesdkarkruntime import Ark 
 
+# 加载环境变量
+load_dotenv('config.env')
+
+# 从环境变量读取配置
+API_KEY = os.getenv('ARK_API_KEY_BACKUP')
+BASE_URL = os.getenv('ARK_BASE_URL', 'https://ark.cn-beijing.volces.com/api/v3')
+MODEL_NAME = os.getenv('MODEL_NAME', 'doubao-seed-1-6-vision-250815')
+
 client = Ark(
     # 模型服务的 Base URL .
-    base_url="https://ark.cn-beijing.volces.com/api/v3", 
+    base_url=BASE_URL, 
     # Get API Key：https://console.volcengine.com/ark/region:ark+cn-beijing/apikey
-    api_key='3fbc40fc-551c-4e91-b9a5-a74efc60eb6a', 
+    api_key=API_KEY, 
 )
 
 completion = client.chat.completions.create(
     # 按需替换 Model ID .
-    model = "Doubao-seed-1-6-vision-250815",
+    model=MODEL_NAME,
     messages = [
         {
             "role": "user",  
